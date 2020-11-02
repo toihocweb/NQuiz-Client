@@ -1,6 +1,8 @@
 import { Button, Card, Col, Row, Typography } from "antd";
+import { useRouter } from "next/router";
 
 const RegisterConfirmPage = () => {
+  const { query } = useRouter();
   return (
     <div className="container">
       <Row
@@ -36,9 +38,7 @@ const RegisterConfirmPage = () => {
                 </Typography.Text>
               </Col>
               <Col span={24}>
-                <Typography.Text strong>
-                  user-email-here@gmail.com
-                </Typography.Text>
+                <Typography.Text strong>{query.email}</Typography.Text>
               </Col>
               <Col span={24}>
                 <Typography.Text>

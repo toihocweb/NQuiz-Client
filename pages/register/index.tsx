@@ -1,4 +1,4 @@
-import { Col, Row, Typography } from "antd";
+import { Col, Row } from "antd";
 import RegisterForm from "../../src/components/RegisterForm/RegisterForm";
 
 const RegisterPage = () => {
@@ -11,12 +11,6 @@ const RegisterPage = () => {
         align="middle"
       >
         <Col>
-          <Typography.Title
-            style={{ textAlign: "center", paddingBottom: "10px" }}
-            level={2}
-          >
-            SIGN UP
-          </Typography.Title>
           <RegisterForm />
         </Col>
       </Row>
