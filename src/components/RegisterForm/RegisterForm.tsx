@@ -1,4 +1,5 @@
 import { Button, Card, Form, Input, Select } from "antd";
+import { useRouter } from "next/router";
 import React from "react";
 
 const formItemLayout = {
@@ -42,10 +43,14 @@ interface RegisterFormValues {
 }
 
 const RegisterForm = () => {
+  const router = useRouter();
   const [form] = Form.useForm();
 
   const onFinish = (values: RegisterFormValues) => {
-    console.log("Received values of form: ", values);
+    if (values) {
+      router.push("/register/confirmation");
+      console.log("Received values of form: ", values);
+    }
   };
   return (
     <Card
