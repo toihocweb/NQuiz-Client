@@ -4,7 +4,7 @@ const HomePage = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
+        <title>NQuiz | Home</title>
       </Head>
     </>
   );
