@@ -1,7 +1,10 @@
 import { Alert, Button, Card, Form, Input, Select, Typography } from "antd";
-import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../../store/actions/registerActions";
+import { REGISTER_RESET } from "../../store/actionsTypes/registerActionTypes";
+import { IUser, RegisterState, RootState } from "../../types";
 
 const formItemLayout = {
   labelCol: {
@@ -44,37 +47,41 @@ interface RegisterFormValues {
 }
 
 const RegisterForm = () => {
+  const dispatch = useDispatch();
   const router = useRouter();
   const [form] = Form.useForm();
-  const [error, setError] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const onFinish = async (values: RegisterFormValues) => {
+  const { user, pending, error, isConfirming } = useSelector<
+    RootState,
+    RegisterState
+  >((state) => state.register);
+
+  const onFinish = (values: RegisterFormValues) => {
     if (values) {
-      const newUser = {
+      const newUser: IUser = {
         name: values.name,
         email: values.email,
         password: values.password,
         career: values.career,
       };
-      try {
-        const response = await axios({
-          url: "http://202.182.100.160:4000/api/v1/auth/register",
-          method: "POST",
-          data: newUser,
-        });
-        console.log(response.data);
-        router.push({
-          pathname: "/register/confirmation",
-          query: { email: response.data.data.email },
-        });
-        setError(null);
-      } catch (error) {
-        const errorEmail = error.response.data.error.email;
-        setError(errorEmail);
-      }
+      dispatch(register(newUser));
+
       console.log("Received values of form: ", values);
     }
   };
+
+  useEffect(() => {
+    if (user && isConfirming) {
+      router.push({
+        pathname: "/register/confirmation",
+        query: { email: user.email },
+      });
+      dispatch({ type: REGISTER_RESET });
+    } else if (error) {
+      setErrorMessage(error);
+    }
+  }, [user, isConfirming, error]);
   return (
     <>
       {error ? (
@@ -82,7 +89,8 @@ const RegisterForm = () => {
           style={{ marginBottom: "20px" }}
           message={
             <Typography.Text>
-              The email: <Typography.Text strong>{error}</Typography.Text> is
+              The email:{" "}
+              <Typography.Text strong>{errorMessage}</Typography.Text> is
               already used! Please use another email
             </Typography.Text>
           }
@@ -196,7 +204,11 @@ const RegisterForm = () => {
             <Input.Password />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={pending ? true : false}
+            >
               SIGN UP
             </Button>
           </Form.Item>

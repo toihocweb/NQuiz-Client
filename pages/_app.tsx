@@ -2,6 +2,8 @@ import { Button, Layout } from "antd";
 import "antd/dist/antd.css";
 import type { AppProps } from "next/app";
 import Link from "next/link";
+import { Provider } from "react-redux";
+import { store } from "../src/store/store";
 import "../styles/global.css";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -22,7 +24,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           </div>
         </Layout.Header>
       </Layout>
-      <Component {...pageProps} />
+      <Provider store={store}>
+        <Component {...pageProps} />
+      </Provider>
     </>
   );
 }
