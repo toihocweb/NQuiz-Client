@@ -3,6 +3,7 @@ import { Router } from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { Provider } from "react-redux";
+import ParticlesContainer from "../src/components/ParticlesContainer/ParticlesContainer";
 import { store } from "../src/store/store";
 import "../styles/global.scss";
 
@@ -26,6 +27,7 @@ Router.events.on("routeChangeError", () => {
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
+      <ParticlesContainer bgColor={"#222"} particlesColor={"#ccc"} />
       <Component {...pageProps} />
     </Provider>
   );
