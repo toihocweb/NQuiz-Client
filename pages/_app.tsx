@@ -4,7 +4,6 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { Provider } from "react-redux";
 import { store } from "../src/store/store";
-import "../styles/antd-custom.less";
 import "../styles/global.scss";
 
 NProgress.configure({

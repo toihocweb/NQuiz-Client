@@ -5,5 +5,23 @@
 
 html,
 body {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
+  // background: #011627 !important;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  &-track {
+    background: #edf6f9;
+  }
+  &-thumb {
+    background: #8d99ae;
+    &:hover {
+      background: #118ab2;
+    }
+  }
 }
