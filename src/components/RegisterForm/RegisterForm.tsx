@@ -1,40 +1,25 @@
+import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
 import { Alert, Button, Card, Form, Input, Select, Typography } from "antd";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../store/actions/registerActions";
 import { REGISTER_RESET } from "../../store/actionsTypes/registerActionTypes";
 import { IUser, RegisterState, RootState } from "../../types";
+import styles from "./RegisterForm.module.scss";
 
 const formItemLayout = {
   labelCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 8,
-    },
+    span: 24,
   },
   wrapperCol: {
-    xs: {
-      span: 24,
-    },
-    sm: {
-      span: 16,
-    },
+    span: 24,
   },
 };
 
 const tailFormItemLayout = {
   wrapperCol: {
-    xs: {
-      span: 24,
-      offset: 0,
-    },
-    sm: {
-      span: 16,
-      offset: 8,
-    },
+    span: 24,
   },
 };
 
@@ -50,7 +35,6 @@ const RegisterForm = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [form] = Form.useForm();
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const { user, pending, error, isConfirming } = useSelector<
     RootState,
@@ -66,9 +50,11 @@ const RegisterForm = () => {
         career: values.career,
       };
       dispatch(register(newUser));
-
-      console.log("Received values of form: ", values);
     }
+  };
+
+  const handleAlertClose = () => {
+    dispatch({ type: REGISTER_RESET });
   };
 
   useEffect(() => {
@@ -78,45 +64,34 @@ const RegisterForm = () => {
         query: { email: user.email },
       });
       dispatch({ type: REGISTER_RESET });
-    } else if (error) {
-      setErrorMessage(error);
-    }
+    } else if (error) window.scrollTo(0, 0);
   }, [user, isConfirming, error]);
+
   return (
     <>
-      {error ? (
-        <Alert
-          style={{ marginBottom: "20px" }}
-          message={
-            <Typography.Text>
-              The email:{" "}
-              <Typography.Text strong>{errorMessage}</Typography.Text> is
-              already used! Please use another email
-            </Typography.Text>
-          }
-          type="error"
-          showIcon
-        />
-      ) : null}
-      <Card
-        style={{
-          minWidth: "600px",
-          borderColor: "transparent",
-          boxShadow:
-            "0 1px 2px -2px rgba(0, 0, 0, 0.16), 0 3px 6px 0 rgba(0, 0, 0, 0.12), 0 5px 12px 4px rgba(0, 0, 0, 0.09)",
-        }}
-      >
-        <Typography.Title
-          style={{ textAlign: "center", paddingBottom: "10px" }}
-          level={2}
-        >
-          SIGN UP
-        </Typography.Title>
+      <Card className={styles.register_card}>
+        <Typography.Title level={2}>NQUIZ</Typography.Title>
+        <Typography.Title level={5}>Create a new account:</Typography.Title>
+        {error ? (
+          <Alert
+            message={
+              <Typography.Text>
+                The email: <Typography.Text strong>{error}</Typography.Text> is
+                already used! Please use another email
+              </Typography.Text>
+            }
+            type="error"
+            showIcon
+            closable
+            afterClose={handleAlertClose}
+          />
+        ) : null}
         <Form
           {...formItemLayout}
           form={form}
           onFinish={onFinish}
-          scrollToFirstError
+          scrollToFirstError={true}
+          className={styles.register_card__form}
         >
           <Form.Item
             name="name"
@@ -130,7 +105,7 @@ const RegisterForm = () => {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} />
           </Form.Item>
           <Form.Item
             name="email"
@@ -147,7 +122,7 @@ const RegisterForm = () => {
             ]}
             hasFeedback
           >
-            <Input />
+            <Input prefix={<MailOutlined className="site-form-item-icon" />} />
           </Form.Item>
           <Form.Item
             name="career"
@@ -180,7 +155,9 @@ const RegisterForm = () => {
             ]}
             hasFeedback
           >
-            <Input.Password />
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+            />
           </Form.Item>
           <Form.Item
             name="confirmPassword"
@@ -201,7 +178,9 @@ const RegisterForm = () => {
               }),
             ]}
           >
-            <Input.Password />
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+            />
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
             <Button

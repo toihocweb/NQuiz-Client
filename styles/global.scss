@@ -2,3 +2,8 @@
   max-width: 990px;
   margin: 0px auto;
 }
+
+html,
+body {
+  scroll-behavior: smooth;
+}
