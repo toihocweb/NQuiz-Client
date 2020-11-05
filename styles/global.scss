@@ -3,7 +3,33 @@
   margin: 0px auto;
 }
 
+#tsparticles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 html,
 body {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth !important;
+  background: #293241 !important;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  &-track {
+    background: #edf6f9;
+  }
+  &-thumb {
+    background: #8d99ae;
+    &:hover {
+      background: #118ab2;
+    }
+  }
 }
