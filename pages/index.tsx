@@ -1,4 +1,5 @@
 import Head from "next/head";
+import AppHeader from "../src/components/AppHeader/AppHeader";
 
 const HomePage = () => {
   return (
@@ -6,6 +7,7 @@ const HomePage = () => {
       <Head>
         <title>NQuiz | Home</title>
       </Head>
+      <AppHeader />
     </>
   );
 };

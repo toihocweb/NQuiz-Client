@@ -34,7 +34,7 @@ export default function register(
         isConfirming: false,
       };
     case REGISTER_RESET:
-      return { ...state, isConfirming: false };
+      return { ...state, user: null, error: null, isConfirming: false };
     default:
       return state;
   }
