@@ -1,20 +1,20 @@
 import { Col, Row } from "antd";
 import Head from "next/head";
-import RegisterForm from "../../src/components/RegisterForm/RegisterForm";
+import LoginForm from "../src/components/LoginForm/LoginForm";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   return (
     <>
       <Head>
-        <title>NQuiz | Signup</title>
+        <title>NQuiz | Login</title>
       </Head>
       <Row gutter={[16, 16]} justify="center" align="middle">
         <Col style={{ margin: "3.625rem 0" }} xs={20} sm={20} md={20} lg={8}>
-          <RegisterForm />
+          <LoginForm />
         </Col>
       </Row>
     </>
   );
 };
 
-export default RegisterPage;
+export default LoginPage;

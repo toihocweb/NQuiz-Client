@@ -28,11 +28,12 @@ const ParticlesContainer: React.FC<ParticlesContainerProps> = ({
             },
             onHover: {
               enable: true,
-              mode: "repulse",
+              mode: "bubble",
               parallax: {
                 force: 60,
               },
             },
+            resize: true,
           },
           modes: {
             bubble: {
@@ -89,13 +90,18 @@ const ParticlesContainer: React.FC<ParticlesContainerProps> = ({
           },
           shape: {
             options: {
-              character: {
-                value: ["n", "q", "u", "i", "z"],
-                font: "Verdana",
-                style: "",
-                weight: "400",
-                fill: true,
-              },
+              image: [
+                {
+                  src: "/images/icons/nquiz_particle.png",
+                  width: 64,
+                  height: 64,
+                },
+                {
+                  src: "/images/icons/nquiz_text.png",
+                  width: 128,
+                  height: 128,
+                },
+              ],
               polygon: {
                 nb_sides: 5,
               },
@@ -103,10 +109,10 @@ const ParticlesContainer: React.FC<ParticlesContainerProps> = ({
                 nb_sides: 5,
               },
             },
-            type: "character",
+            type: "image",
           },
           size: {
-            value: 16,
+            value: 12,
             animation: {
               minimumValue: 10,
               speed: 10,
