@@ -18,6 +18,9 @@ const AppHeader = () => {
           <Link href="/register">
             <Button type="primary">Register</Button>
           </Link>
+          <Link href="/login">
+            <Button>Sign In</Button>
+          </Link>
         </div>
       </Layout.Header>
     </Layout>

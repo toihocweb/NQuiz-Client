@@ -1,5 +1,5 @@
 import { LockOutlined, MailOutlined } from "@ant-design/icons";
-import { Button, Card, Form, Input, Typography } from "antd";
+import { Button, Card, Col, Form, Input, Row, Typography } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import Link from "next/link";
 import React from "react";
@@ -25,7 +25,11 @@ const LoginForm = () => {
   const onFinish = () => {};
   return (
     <Card className="auth_card">
-      <Typography.Title level={2}>NQUIZ</Typography.Title>
+      <Row>
+        <Col span={24} className="auth_card__imageContainer">
+          <img src="/images/logo/nquiz_logo_xs.png" />
+        </Col>
+      </Row>
       <Typography.Title level={5}>
         Don't have an account yet ? <Link href="/register">Sign Up</Link>
       </Typography.Title>
