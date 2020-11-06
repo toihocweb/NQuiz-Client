@@ -1,5 +1,15 @@
 import { LockOutlined, MailOutlined, UserOutlined } from "@ant-design/icons";
-import { Alert, Button, Card, Form, Input, Select, Typography } from "antd";
+import {
+  Alert,
+  Button,
+  Card,
+  Col,
+  Form,
+  Input,
+  Row,
+  Select,
+  Typography,
+} from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -69,9 +79,13 @@ const RegisterForm = () => {
 
   return (
     <Card className="auth_card">
-      <Typography.Title level={2}>NQUIZ</Typography.Title>
+      <Row>
+        <Col span={24} className="auth_card__imageContainer">
+          <img src="/images/logo/nquiz_logo_xs.png" />
+        </Col>
+      </Row>
       <Typography.Title level={5}>Create a new account</Typography.Title>
-      <Typography.Text strong>
+      <Typography.Text strong className="auth_card__text">
         <Link href="/login">I have an account</Link>
       </Typography.Text>
       {error ? (
