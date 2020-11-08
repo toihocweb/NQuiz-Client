@@ -8,7 +8,6 @@ import React, { useEffect, useState } from "react";
 const ConfirmEmailPage = () => {
   const { query } = useRouter();
   const [error, setError] = useState<boolean>(false);
-
   useEffect(() => {
     const fetchResult = async () => {
       try {
@@ -19,12 +18,12 @@ const ConfirmEmailPage = () => {
         console.log(response.data);
         setError(false);
       } catch (error) {
-        console.log(error.response);
         setError(true);
+        console.log(error.response);
       }
     };
-    fetchResult();
-  }, [query.token]);
+    if (query.token) fetchResult();
+  }, [query]);
   return (
     <>
       <Head>
@@ -57,7 +56,7 @@ const ConfirmEmailPage = () => {
               <Col span={24} style={{ marginTop: "20px" }}>
                 <Typography.Title level={3}>
                   {error
-                    ? "Opps... There something wrong with NQuiz! Please try again later"
+                    ? "Oops... There is something wrong with NQuiz! Please try again later"
                     : "Congratulations! Your registration is complete"}
                 </Typography.Title>
               </Col>
